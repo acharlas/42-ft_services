@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: image_nginx
+        image: nginx_image
         imagePullPolicy: Never
         ports:
         - containerPort: 80

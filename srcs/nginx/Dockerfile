@@ -2,7 +2,7 @@ FROM alpine
 RUN apk update
 
 RUN apk add nginx
-RUN mkdir /cert
+RUN mkdir -p /cert
 RUN mkdir -p /run/nginx
 
 COPY ./cert/server.crt /cert/.
