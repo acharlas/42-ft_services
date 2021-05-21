@@ -30,13 +30,15 @@ metadata:
 spec:
   selector:
     app: nginx
-  type: LoadBalancer
   ports:
-    - name: http
+    - protocol: TCP
       port: 80
       targetPort: 80
       nodePort: 80
-    - name: https
-      port: 433
+      name: http
+    - protocol: TCP
+      port: 443
       targetPort: 443
       nodePort: 443
+      name: https
+  type: LoadBalancer

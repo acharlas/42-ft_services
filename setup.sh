@@ -55,6 +55,7 @@ case $1 in
         minikube addons enable dashboard 
         eval $(minikube docker-env)
 
+        install_metallb
         $0 build
         $0 create
         wait_containers
