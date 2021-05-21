@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ftps-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ftps
+  template:
+    metadata:
+      labels:
+        app: ftps
+    spec:
+      containers:
+      - name: ftps
+        image: ftps_image
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 21
+          name: ftp
+        - containerPort: 20
+          name: ftp-data
+        - containerPort: 1042
+          name: ftp-pasv
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ftps
+  annotations:
+    metallb.universe.tf/allow-shared-ip: acharlas
+spec:
+  selector:
+    app: ftps
+  ports:
+    - protocol: TCP
+      name: ftp
+      port: 21
+      targetPort: 21
+      nodePort: 21
+    - protocol: TCP
+      name: ftp-data
+      port: 20
+      targetPort: 20
+      nodePort: 20
+    - protocol: TCP
+      name: ftp-pasv
+      port: 1042
+      targetPort: 1042
+      nodePort: 1042
+  type: LoadBalancer
