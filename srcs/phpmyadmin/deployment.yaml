@@ -18,6 +18,14 @@ spec:
         ports:
         - containerPort: 80
         - containerPort: 443
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - 'pgrep telegraf && pgrep nginx'
+          initialDelaySeconds: 5
+          periodSeconds: 5
 
 ---
 

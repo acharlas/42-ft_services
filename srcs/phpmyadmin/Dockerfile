@@ -1,7 +1,7 @@
 FROM alpine
 
 RUN apk update
-RUN apk add nginx php7-fpm php7-mysqli php7-json php7-iconv php7-xml php7-session
+RUN apk add nginx php7-fpm php7-mysqli php7-json php7-iconv php7-xml php7-session telegraf
 
 RUN mkdir -p /run/nginx
 RUN mkdir -p /run/php
@@ -15,8 +15,9 @@ COPY ./cert/server.crt /cert/.
 COPY ./cert/server.key /cert/.
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY www.conf /etc/php7/php-fpm.d/www.conf
+COPY telegraf.conf /etc/telegraf.conf
 
 COPY config.inc.php /var/www/phpmyadmin
 RUN rm /var/www/phpmyadmin/config.sample.inc.php
 
-CMD php-fpm7 & nginx -g 'daemon off;'
+CMD telegraf --config /etc/telegraf.conf & php-fpm7 && nginx -g 'daemon off;'

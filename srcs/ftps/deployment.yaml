@@ -22,6 +22,14 @@ spec:
           name: ftp-data
         - containerPort: 1042
           name: ftp-pasv
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - 'pgrep telegraf && pgrep vsftpd'
+          initialDelaySeconds: 5
+          periodSeconds: 5
 
 ---
 
