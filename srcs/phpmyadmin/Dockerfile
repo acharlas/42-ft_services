@@ -20,4 +20,4 @@ COPY telegraf.conf /etc/telegraf.conf
 COPY config.inc.php /var/www/phpmyadmin
 RUN rm /var/www/phpmyadmin/config.sample.inc.php
 
-CMD telegraf --config /etc/telegraf.conf & php-fpm7 && nginx -g 'daemon off;'
+CMD telegraf --config /etc/telegraf.conf & php-fpm7 & nginx -g 'daemon off;'

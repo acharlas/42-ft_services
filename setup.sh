@@ -5,17 +5,17 @@ CONTAINERS="mysql influxdb nginx phpmyadmin grafana ftps wordpress"
 
 function build_image {
     echo "Building image for $1"
-    docker build srcs/$1 -t $1_image #> /dev/null 2>&1
+    docker build srcs/$1 -t $1_image > /dev/null 2>&1
 }
 
 function create_deployment {
     echo "Building deployment for $1"
-    kubectl apply -f srcs/$1/deployment.yaml #> /dev/null 2>&1
+    kubectl apply -f srcs/$1/deployment.yaml > /dev/null 2>&1
 }
 
 function delete_deployment {
     echo "Deleting deployment for $1"
-    kubectl delete -f srcs/$1/deployment.yaml #> /dev/null 2>&1
+    kubectl delete -f srcs/$1/deployment.yaml > /dev/null 2>&1
 }
 
 function wait_containers {

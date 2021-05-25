@@ -13,4 +13,4 @@ COPY ./cert/server.key /cert/.
 COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
 COPY telegraf.conf /etc/telegraf.conf
 
-CMD telegraf --config /etc/telegraf.conf & vsftpd /etc/vsftpd/vsftpd.conf
+CMD telegraf --config /etc/telegraf.conf & vsftpd /etc/vsftpd/vsftpd.conf && tail -f /dev/null

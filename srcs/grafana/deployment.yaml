@@ -31,10 +31,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: grafana
+  name: grafana-service
   annotations:
     metallb.universe.tf/allow-shared-ip: acharlas
-
 spec:
   selector:
     app: grafana
