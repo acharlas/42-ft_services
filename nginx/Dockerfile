@@ -2,7 +2,7 @@ FROM alpine:latest
 LABEL maintainer="acharlas@student.42.fr"
 # Install and setup nginx
 RUN apk update && apk add --no-cache telegraf
-RUN apk add nginx && mkdir /run/nginx
+RUN apk add nginx && mkdir -p /run/nginx
 COPY key.pem /etc/ssl/private/key.pem
 COPY cert.pem /etc/ssl/certs/cert.pem
 COPY nginx.conf /etc/nginx/nginx.conf

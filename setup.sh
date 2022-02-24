@@ -4,17 +4,17 @@ CONTAINERS="influxdb grafana mysql phpmyadmin wordpress nginx ftps"
 
 function build_image {
 	echo "Building image for $1"
-	docker build $1 -t acharlas/$1 > /dev/null 2>&1
+	docker build $1 -t acharlas/$1 # > /dev/null 2>&1
 }
 
 function create_deployment {
 	echo "Creating deployment for $1"
-	kubectl apply -f $1/$1.yaml > /dev/null 2>&1
+	kubectl apply -f $1/$1.yaml # > /dev/null 2>&1
 }
 
 function delete_deployment {
 	echo "Deleting deployment for $1"
-	kubectl delete -f $1/$1.yaml > /dev/null 2>&1
+	kubectl delete -f $1/$1.yaml # > /dev/null 2>&1
 }
 
 function generate_ssl {
@@ -49,7 +49,7 @@ function wait_containers {
 case $1 in
 	main)
 		# Verify that minikube is installed and docker is setup
-		groups | grep docker > /dev/null 2>&1
+		groups | grep docker # > /dev/null 2>&1
 		if [ $? -eq 0 ]; then
 			echo "Docker is setup properly" 
 		else 
@@ -60,9 +60,9 @@ case $1 in
 
 		
 		echo "Starting minikube"
-		minikube delete > /dev/null 2>&1
-		minikube start --driver=docker --extra-config=apiserver.service-node-port-range=0-30000 > /dev/null 2>&1
-		minikube addons enable dashboard > /dev/null 2>&1
+		minikube delete # > /dev/null 2>&1
+		minikube start --driver=docker --extra-config=apiserver.service-node-port-range=0-30000 # > /dev/null 2>&1
+		minikube addons enable dashboard # > /dev/null 2>&1
 		#Minikube eval
 		eval $(minikube docker-env)
 		install_metallb
@@ -73,7 +73,7 @@ case $1 in
 		wait_containers
 		echo "Opening http://172.17.0.2 in firefox"
 		firefox -private-window http://172.17.0.2 &
-		minikube dashboard > /dev/null 2>&1
+		minikube dashboard # > /dev/null 2>&1
 	;;
 
 	#Creating deployments
