@@ -1,3 +1,0 @@
-CREATE DATABASE grafana;
-CREATE USER graf_admin with PASSWORD 'admin';
-GRANT ALL ON grafana to graf_admin;
