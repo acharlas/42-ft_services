@@ -5,7 +5,7 @@ RUN mkdir -p /run/mysqld
 RUN mysql_install_db -u root --datadir=/var/lib/mysql --skip-test-db
 COPY init.sql init.sql
 COPY mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
-RUN mysqld -u root & sleep 2 && mysql < init.sql && exit
+RUN mysqld -u root & sleep 10 && mysql < init.sql && exit
 COPY telegraf.conf /etc/telegraf.conf
 COPY start.sh start.sh
 RUN tar czf datadir.gz -C /var/lib/ mysql
